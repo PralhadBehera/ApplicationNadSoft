@@ -1,6 +1,5 @@
 
 
-
 // import { Component, OnInit } from '@angular/core';
 // import { ApiService } from '../api.service';
 
@@ -30,8 +29,8 @@
 //   // Method to fetch student data from the API
 //   loadStudents(): void {
 //     this.apiService.getStudents().subscribe(
-//       (data: any) => {
-//         this.students = data; // API response should be the array of students
+//       (data: any[]) => {
+//         this.students = data; // Use the data array directly
 //       },
 //       error => {
 //         console.error('Error fetching student data:', error);
@@ -92,8 +91,6 @@
 // }
 
 
-
-
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 
@@ -109,9 +106,17 @@ export class TableComponent implements OnInit {
     email: '',
     age: null
   };
-
+  
+  selectedStudent: any = {
+    name: '',
+    email: '',
+    age: null
+  };
+  
+  
   display: string = 'none';
   displayDelete: string = 'none';
+  displayUpdate: string = 'none';
   selectedStudentId: number | null = null; // To store the ID of the student to be deleted
 
   constructor(private apiService: ApiService) {}
@@ -152,6 +157,19 @@ export class TableComponent implements OnInit {
   onCloseHandledDelete(): void {
     this.displayDelete = "none";
     this.selectedStudentId = null; // Reset the selected student ID
+    console.log(this.selectedStudent)
+  }
+
+  // Open the update modal
+  openModalUpdate(student: any): void {
+    this.selectedStudent = { ...student }; // Copy the student data
+    this.displayUpdate = "block"; // Show the update modal
+  }
+  
+
+  // Close the update modal
+  onCloseHandledUpdate(): void {
+    this.displayUpdate = "none";
   }
 
   // Submit the form to add a new student
@@ -169,13 +187,28 @@ export class TableComponent implements OnInit {
     }
   }
 
+  // Update student details
+  onUpdate(): void {
+    if (this.selectedStudent.name && this.selectedStudent.email && this.selectedStudent.age) {
+      this.apiService.updateStudent(this.selectedStudent.id, this.selectedStudent).subscribe(response => {
+        console.log('Student updated successfully', response);
+        this.loadStudents(); // Refresh the student list after updating
+        this.onCloseHandledUpdate(); // Hide the update form after submission
+      }, error => {
+        console.error('Error updating student', error);
+      });
+    } else {
+      console.error('Form is invalid');
+    }
+  }
+
   // Delete a student by ID
   deleteStudent(): void {
     if (this.selectedStudentId !== null) {
       this.apiService.deleteStudent(this.selectedStudentId).subscribe(
         () => {
           this.students = this.students.filter(student => student.id !== this.selectedStudentId);
-          alert('Student deleted successfully');
+         
           this.onCloseHandledDelete(); // Close the modal after deletion
         },
         error => console.error('Error deleting student', error)
@@ -183,3 +216,4 @@ export class TableComponent implements OnInit {
     }
   }
 }
+
