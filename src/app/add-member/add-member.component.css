@@ -1,0 +1,35 @@
+
+
+.custom-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.2);
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #8a2be2;
+  }
+
+  .custom-card .card-title {
+    text-shadow: 2px 2px 4px rgba(138, 43, 226, 0.2);
+  }
+
+  .custom-card .card-text {
+    text-shadow: 2px 2px 4px rgba(138, 43, 226, 0.2);
+  }
+  .circle {
+width: 40px;
+height: 40px;
+background: #8a2be2; /* Violet color */
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+position: absolute;
+top: 15px;
+right: 15px;
+}
+
+.plus {
+font-size: 20px;
+color: white;
+}

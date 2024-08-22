@@ -1,0 +1,354 @@
+<!-- 
+<div class="container-fluid">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-2 g-lg-3">
+      <div class="col">
+        <div class="p-3 all-member-label fw-semibold fs-3">All Member</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row align-items-center">
+        
+              <div class="col-12 col-md-4 mb-2 mb-md-0">
+                <form action="" class="d-flex">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="search"
+                    placeholder="Search Member"
+                  />
+                </form>
+              </div>
+
+              <div class="col-4"></div>
+
+   
+              <div
+                class="col-lg-4 col-md-4 text-center text-md-end mb-2 mb-md-0"
+              >
+                <button class="btn btn-success" (click)="openModal()">
+                  Add New Member
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+         
+          </div>
+          <table class="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col" class="email-col">Member Name</th>
+                <th scope="col" class="email-col">Member Email</th>
+                <th scope="col" class="age-col">Age</th>
+                <th scope="col" class="action-col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+           
+              <tr *ngFor="let student of students">
+                <th scope="row">{{ student.id }}</th>
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.age }}</td>
+                <td>
+                  <button    style="
+                  background: none;
+                  border: none;
+                  padding: 0;
+                  cursor: pointer;
+                  margin-left: auto;
+                "><img width="30" height="30" src="https://img.icons8.com/fluency/48/delete-forever.png" alt="delete-forever" (click)="openModalDelete(student)"/></button>
+                  <button  style="
+                  background: none;
+                  border: none;
+                  padding: 0;
+                  cursor: pointer;
+                  margin-left: auto;" ><img width="30" height="30" src="https://img.icons8.com/fluency/48/installing-updates.png" alt="installing-updates"/></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: display }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <i class="fa-solid fa-list-check fa-lg"></i> Add Memeber
+        </h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseHandled()"
+          style="
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            margin-left: auto;
+          "
+        >
+          <img
+            height="25"
+            width="25"
+            src="https://img.icons8.com/color/48/delete-sign--v1.png"
+            alt="delete-sign--v1"
+          />
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #memberForm="ngForm">
+          <div class="mb-2 custom-form-group">
+            <label for="name" class="form-label">
+              <i class="fas fa-thumbtack"></i> Name
+            </label>
+            <input
+              type="text"
+              class="form-control custom-input"
+              id="name"
+              [(ngModel)]="newMember.name"
+              name="name"
+            />
+          </div>
+
+          <div class="mb-2 custom-form-group">
+            <label for="email" class="form-label">
+              <i class="fas fa-thumbtack"></i> Email
+            </label>
+            <input
+              type="email"
+              class="form-control custom-input"
+              id="email"
+              [(ngModel)]="newMember.email"
+              name="email"
+            />
+          </div>
+          <div class="mb-2 custom-form-group">
+            <label for="age" class="form-label">
+              <i class="fas fa-thumbtack"></i> Age
+            </label>
+            <input
+              type="Number"
+              class="form-control custom-input"
+              id="age"
+              [(ngModel)]="newMember.age"
+              name="age"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: center; align-items: center;">
+        <button type="button" class="btn btn-success" (click)="onSubmit()">
+          Submit
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayDelete }">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+            <img width="200px" height="200px" src="data:image/png;base64,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" alt="break" style="margin-bottom: 20px;" />
+            <h4>Are you sure you want to delete?</h4>
+            <p> If you delete this member then this action can not be undo </p>
+          </div>
+          
+        <div class="modal-footer" style="display: flex; justify-content: center; align-items: center;">
+          <button type="button" class="btn btn-success" >
+            Yes Delete it 
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ -->
+
+
+
+ <div class="container-fluid">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-2 g-lg-3">
+      <div class="col">
+        <div class="p-3 all-member-label fw-semibold fs-3">All Member</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row align-items-center">
+              <!-- Search Member Input -->
+              <div class="col-12 col-md-4 mb-2 mb-md-0">
+                <form action="" class="d-flex">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="search"
+                    placeholder="Search Member"
+                  />
+                </form>
+              </div>
+
+              <div class="col-4"></div>
+
+              <!-- Add New Member Button -->
+              <div class="col-lg-4 col-md-4 text-center text-md-end mb-2 mb-md-0">
+                <button class="btn btn-success" (click)="openModal()">
+                  Add New Member
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <!-- Horizontal line for separation -->
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col" class="email-col">Member Name</th>
+                  <th scope="col" class="email-col">Member Email</th>
+                  <th scope="col" class="age-col">Age</th>
+                  <th scope="col" class="action-col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Loop through students and display in table rows -->
+                <tr *ngFor="let student of students">
+                  <th scope="row">{{ student.id }}</th>
+                  <td>{{ student.name }}</td>
+                  <td>{{ student.email }}</td>
+                  <td>{{ student.age }}</td>
+                  <td>
+                    <button style="background: none; border: none; padding: 0; cursor: pointer; margin-left: auto;">
+                      <img width="30" height="30" src="https://img.icons8.com/fluency/48/delete-forever.png" alt="delete-forever" (click)="openModalDelete(student.id)"/>
+                    </button>
+                    <button style="background: none; border: none; padding: 0; cursor: pointer; margin-left: auto;">
+                      <img width="30" height="30" src="https://img.icons8.com/fluency/48/installing-updates.png" alt="installing-updates"/>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Member Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: display }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <i class="fa-solid fa-list-check fa-lg"></i> Add Member
+        </h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseHandled()"
+          style="background: none; border: none; padding: 0; cursor: pointer; margin-left: auto;"
+        >
+          <img height="25" width="25" src="https://img.icons8.com/color/48/delete-sign--v1.png" alt="delete-sign--v1"/>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #memberForm="ngForm">
+          <div class="mb-2 custom-form-group">
+            <label for="name" class="form-label">
+              <i class="fas fa-thumbtack"></i> Name
+            </label>
+            <input
+              type="text"
+              class="form-control custom-input"
+              id="name"
+              [(ngModel)]="newMember.name"
+              name="name"
+            />
+          </div>
+
+          <div class="mb-2 custom-form-group">
+            <label for="email" class="form-label">
+              <i class="fas fa-thumbtack"></i> Email
+            </label>
+            <input
+              type="email"
+              class="form-control custom-input"
+              id="email"
+              [(ngModel)]="newMember.email"
+              name="email"
+            />
+          </div>
+          <div class="mb-2 custom-form-group">
+            <label for="age" class="form-label">
+              <i class="fas fa-thumbtack"></i> Age
+            </label>
+            <input
+              type="Number"
+              class="form-control custom-input"
+              id="age"
+              [(ngModel)]="newMember.age"
+              name="age"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: center; align-items: center;">
+        <button type="button" class="btn btn-success" (click)="onSubmit()">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayDelete }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <img width="200px" height="200px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNt3v6ep-AIGowqDTyb2DiQYRh1SEwUIDfQ&s" alt="break" style="margin-bottom: 20px;" />
+        <h4>Are you sure you want to delete?</h4>
+        <p>If you delete this member, this action cannot be undone.</p>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: center; align-items: center;">
+        <button type="button" class="btn btn-success" (click)="deleteStudent()">
+          Yes, Delete it
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onCloseHandledDelete()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

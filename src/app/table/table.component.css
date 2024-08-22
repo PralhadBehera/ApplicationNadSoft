@@ -1,0 +1,58 @@
+.all-member-label {
+    text-align: center;
+    margin: 0 auto;
+    
+  }
+  .align-md-start {
+    text-align: left;
+  }
+  .card {
+    margin: 0 auto;
+  }
+
+  /* Style for the email column */
+.email-col {
+    width: 30%; /* Adjust width as needed */
+  }
+  
+  /* Style for the age column */
+  .age-col {
+    width: 10%; /* Reduce width as needed */
+  }
+  
+  /* Style for the action column */
+  .action-col {
+    width: 15%; /* Adjust width as needed */
+  }
+  
+  /* Optional: Ensure table layout is fixed to respect column widths */
+  .table {
+    table-layout: fixed;
+  }
+  
+  /* Optional: Adjust table responsiveness if needed */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+
+  
+
+
+/* Custom styling for labels */
+.form-label {
+    color: #0c0c0c; /* Blue label text color */
+    font-weight: bold;
+}
+
+
+
+.modal {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, .6);
+}
+
+
+
+
+  
