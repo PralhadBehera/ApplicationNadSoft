@@ -53,6 +53,29 @@
 }
 
 
+/* Style for the pagination container */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Adjust alignment as needed */
+  margin: 20px 0; /* Optional margin for spacing */
+}
+
+/* Style for pagination controls */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+}
+
+/* Optional styling for buttons */
+.pagination-controls button {
+  margin: 0 5px;
+}
+
+/* Optional styling for the page size selector */
+#pageSize {
+  margin-left: 10px;
+}
 
 
   

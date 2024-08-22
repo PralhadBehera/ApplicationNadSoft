@@ -1,6 +1,6 @@
 
 
- <div class="container-fluid">
+<div class="container-fluid">
   <div class="container">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-2 g-lg-3">
       <div class="col">
@@ -69,6 +69,37 @@
                 </tr>
               </tbody>
             </table>
+           <!-- Dropdown to select page size -->
+<!-- Dropdown to select page size -->
+<!-- <label for="pageSize">Page Size:</label>
+<select id="pageSize" (change)="onPageSizeChange($event)">
+  <option value="5">5</option>
+  <option value="10" selected>10</option>
+  <option value="20">20</option>
+  <option value="50">50</option>
+</select> -->
+
+
+<!-- Page Size Selection -->
+<!-- Page Size Selection -->
+<div class="pagination-container">
+  <!-- Page Size Selector -->
+  <label for="pageSize">Page Size:</label>
+  <select id="pageSize" (change)="onPageSizeChange($event)">
+    <option value="5">5</option>
+    <option value="10" selected>10</option>
+    <option value="20">20</option>
+    <option value="50">50</option>
+  </select>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+    <span class="btn btn-success">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="btn btn-primary">Next</button>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
